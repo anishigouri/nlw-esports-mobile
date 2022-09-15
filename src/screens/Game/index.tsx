@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Background } from "../../components/Background";
 
-import { FlatList, Image, TouchableOpacity, View } from "react-native";
+import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import { IGameParams } from "../../@types/navigation";
 import { styles } from "./styles";
 
@@ -58,9 +58,16 @@ export function Game() {
             <DuoCard data={item} onConnect={onConnect} />
           )}
           horizontal
-          contentContainerStyle={styles.contentList}
+          contentContainerStyle={
+            duos.length > 0 ? styles.contentList : styles.contentEmptyList
+          }
           showsHorizontalScrollIndicator={false}
           style={styles.containerList}
+          ListEmptyComponent={() => (
+            <Text style={styles.emptyListText}>
+              Não há anúncios publicados ainda
+            </Text>
+          )}
         />
       </SafeAreaView>
     </Background>
